@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Recipe } from "./recipe.model";
 import { Ingredient } from "src/app/shared/ingredient.model";
 import { ShoppingListService } from "../shopping/shopping-list/shopping-list.service";
@@ -21,10 +22,21 @@ export class RecipeService {
     ),
   ];
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private router: Router
+  ) {}
 
   getRecipes() {
     return this.recipes.slice();
+  }
+
+  getRecipe(index: number) {
+    const recipe = this.recipes[index];
+    if (!recipe) {
+      this.router.navigate(["/"]);
+    }
+    return recipe;
   }
 
   addIngredientsToShoppingList(ingredientsArr: Ingredient[]) {
