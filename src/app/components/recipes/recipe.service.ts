@@ -1,12 +1,13 @@
-import { EventEmitter, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Recipe } from "./recipe.model";
 import { Ingredient } from "src/app/shared/ingredient.model";
 import { ShoppingListService } from "../shopping/shopping-list/shopping-list.service";
+import { Subject } from "rxjs";
 
 @Injectable()
 export class RecipeService {
-  public selectedRecipe = new EventEmitter<Recipe>();
+  public recipeChanged = new Subject<Recipe[]>();
   private recipes: Recipe[] = [
     new Recipe(
       "Pierogi Ruskie",
@@ -39,7 +40,27 @@ export class RecipeService {
     return recipe;
   }
 
+  addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe);
+    this.recipeChanged.next(this.recipes.slice());
+  }
+
+  updateRecipe(index: number, recipe: Recipe) {
+    this.recipes[index] = recipe;
+    this.recipeChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
+    this.recipeChanged.next(this.recipes.slice());
+  }
+
   addIngredientsToShoppingList(ingredientsArr: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredientsArr);
   }
+
+  // deleteIngredient(recipeIndex: number, ingredientIndex: number) {
+  //   console.log(this.recipes[recipeIndex].ingredients[ingredientIndex]);
+  //   this.recipes[recipeIndex].ingredients.splice(ingredientIndex, 1);
+  // }
 }

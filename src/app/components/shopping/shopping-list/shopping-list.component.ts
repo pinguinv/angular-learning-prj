@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Ingredient } from "src/app/shared/ingredient.model";
 import { ShoppingListService } from "./shopping-list.service";
 
@@ -7,7 +7,7 @@ import { ShoppingListService } from "./shopping-list.service";
   templateUrl: "./shopping-list.component.html",
   styleUrls: ["./shopping-list.component.css"],
 })
-export class ShoppingListComponent implements OnInit {
+export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Ingredient[] = [];
 
   constructor(private shoppingListService: ShoppingListService) {}
@@ -19,5 +19,13 @@ export class ShoppingListComponent implements OnInit {
         this.ingredients = ingredientsArr;
       }
     );
+  }
+
+  editIngredient(index: number) {
+    this.shoppingListService.editing.next(index);
+  }
+
+  ngOnDestroy(): void {
+    this.shoppingListService.ingredientChanged.unsubscribe();
   }
 }
