@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./components/header/header.component";
@@ -14,9 +14,12 @@ import { RecipeDetailComponent } from "./components/recipes/recipe-detail/recipe
 import { ShoppingEditComponent } from "./components/shopping/shopping-list/shopping-edit/shopping-edit.component";
 import { RecipeStartComponent } from "./components/recipes/recipe-start/recipe-start.component";
 import { RecipeEditComponent } from "./components/recipes/recipe-edit/recipe-edit.component";
+import { AuthComponent } from "./components/auth/auth.component";
+import { LoadingSpinnerComponent } from "./shared/loading-spinner/loading-spinner.component";
 
 import { ShoppingListService } from "./components/shopping/shopping-list/shopping-list.service";
 import { RecipeService } from "./components/recipes/recipe.service";
+import { AuthInterceptorService } from "./components/auth/auth-interceptor.service";
 
 import { DropdownDirective } from "./shared/dropdown.directive";
 
@@ -33,6 +36,8 @@ import { DropdownDirective } from "./shared/dropdown.directive";
     DropdownDirective,
     RecipeStartComponent,
     RecipeEditComponent,
+    AuthComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,15 @@ import { DropdownDirective } from "./shared/dropdown.directive";
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [ShoppingListService, RecipeService],
+  providers: [
+    ShoppingListService,
+    RecipeService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -21,10 +21,12 @@ export class RecipeEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.currentRoute.params.subscribe((params: Params) => {
-      this.index = +params["index"];
-      this.editMode = params["index"] != null;
-      this.initForm();
+    this.currentRoute.params.subscribe({
+      next: (params: Params) => {
+        this.index = +params["index"];
+        this.editMode = params["index"] != null;
+        this.initForm();
+      },
     });
   }
 

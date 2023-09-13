@@ -8,11 +8,14 @@ import { ShoppingListComponent } from "./components/shopping/shopping-list/shopp
 import { RecipeStartComponent } from "./components/recipes/recipe-start/recipe-start.component";
 import { RecipeDetailComponent } from "./components/recipes/recipe-detail/recipe-detail.component";
 import { RecipeEditComponent } from "./components/recipes/recipe-edit/recipe-edit.component";
+import { AuthComponent } from "./components/auth/auth.component";
+import { authGuardFn } from "./components/auth/auth.guard";
 
 const appRoutes: Routes = [
   {
     path: "recipes",
     component: RecipesComponent,
+    canActivate: [authGuardFn],
     children: [
       { path: "", component: RecipeStartComponent },
       { path: "new", component: RecipeEditComponent },
@@ -32,6 +35,7 @@ const appRoutes: Routes = [
   },
   { path: "shopping-list", component: ShoppingListComponent, children: [] },
   // { path: "", redirectTo: "recipes", pathMatch: "full" },
+  { path: "auth", component: AuthComponent },
   { path: "**", redirectTo: "recipes" },
 ];
 
