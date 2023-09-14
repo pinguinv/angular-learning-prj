@@ -8,7 +8,7 @@ import { AuthService } from "./auth.service";
 import { inject } from "@angular/core";
 import { map, take, tap } from "rxjs";
 
-export const authGuardFn: CanActivateFn = (
+export const AuthGuardFn: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
   authService: AuthService = inject(AuthService),

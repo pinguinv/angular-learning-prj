@@ -26,7 +26,7 @@ export class DataStorageService {
       )
       .subscribe({
         next: (response) => {
-          console.log(response);
+          // console.log(response);
         },
       });
   }

@@ -1,47 +1,34 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-
-import { RecipesResolver } from "./components/recipes/recipes-resolver.service";
-
-import { RecipesComponent } from "./components/recipes/recipes.component";
-import { ShoppingListComponent } from "./components/shopping/shopping-list/shopping-list.component";
-import { RecipeStartComponent } from "./components/recipes/recipe-start/recipe-start.component";
-import { RecipeDetailComponent } from "./components/recipes/recipe-detail/recipe-detail.component";
-import { RecipeEditComponent } from "./components/recipes/recipe-edit/recipe-edit.component";
-import { AuthComponent } from "./components/auth/auth.component";
-import { authGuardFn } from "./components/auth/auth.guard";
-import { antiAuthGuardFn } from "./components/auth/anti-auth.guard";
+import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
 
 const appRoutes: Routes = [
+  { path: "", redirectTo: "recipes", pathMatch: "full" },
+  {
+    path: "auth",
+    loadChildren: () =>
+      import("./components/auth/auth.module").then((m) => m.AuthModule),
+  },
   {
     path: "recipes",
-    component: RecipesComponent,
-    canActivate: [authGuardFn],
-    children: [
-      { path: "", component: RecipeStartComponent },
-      { path: "new", component: RecipeEditComponent },
-      {
-        path: ":index",
-        component: RecipeDetailComponent,
-        // resolve: [RecipesResolverService],
-        resolve: [RecipesResolver],
-      },
-      {
-        path: ":index/edit",
-        component: RecipeEditComponent,
-        // resolve: [RecipesResolverService],
-        resolve: [RecipesResolver],
-      },
-    ],
+    loadChildren: () =>
+      import("./components/recipes/recipes.module").then(
+        (m) => m.RecipesModule
+      ),
   },
-  { path: "shopping-list", component: ShoppingListComponent, children: [] },
-  // { path: "", redirectTo: "recipes", pathMatch: "full" },
-  { path: "auth", component: AuthComponent, canActivate: [antiAuthGuardFn] },
-  { path: "**", redirectTo: "recipes" },
+  {
+    path: "shopping-list",
+    loadChildren: () =>
+      import("./components/shopping/shopping-list/shopping-list.module").then(
+        (m) => m.ShoppingListModule
+      ),
+  },
+  // { path: "**", redirectTo: "recipes" },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [
+    RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

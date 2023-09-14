@@ -9,7 +9,7 @@ import { DataStorageService } from "src/app/shared/data-storage.service";
 import { Recipe } from "./recipe.model";
 import { RecipeService } from "./recipe.service";
 
-export const RecipesResolver: ResolveFn<Recipe[]> = (
+export const RecipesResolverFn: ResolveFn<Recipe[]> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
   dataStorageService: DataStorageService = inject(DataStorageService),
