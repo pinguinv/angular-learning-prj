@@ -10,6 +10,7 @@ import { RecipeDetailComponent } from "./components/recipes/recipe-detail/recipe
 import { RecipeEditComponent } from "./components/recipes/recipe-edit/recipe-edit.component";
 import { AuthComponent } from "./components/auth/auth.component";
 import { authGuardFn } from "./components/auth/auth.guard";
+import { antiAuthGuardFn } from "./components/auth/anti-auth.guard";
 
 const appRoutes: Routes = [
   {
@@ -35,7 +36,7 @@ const appRoutes: Routes = [
   },
   { path: "shopping-list", component: ShoppingListComponent, children: [] },
   // { path: "", redirectTo: "recipes", pathMatch: "full" },
-  { path: "auth", component: AuthComponent },
+  { path: "auth", component: AuthComponent, canActivate: [antiAuthGuardFn] },
   { path: "**", redirectTo: "recipes" },
 ];
 
