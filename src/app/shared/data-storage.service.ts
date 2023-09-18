@@ -21,7 +21,7 @@ export class DataStorageService {
     // można tu dać return i subscribe w headerze żeby pokazać jakąś ikonkę ładowania czy cuś
     this.http
       .put<Recipe[]>(
-        "https://angular-lrn-prj-default-rtdb.europe-west1.firebasedatabase.app/recipes.json",
+        "https://angular-lrn-prjct-default-rtdb.europe-west1.firebasedatabase.app/recipes.json",
         recipes
       )
       .subscribe({
@@ -34,7 +34,7 @@ export class DataStorageService {
   fetchRecipes() {
     return this.http
       .get<Recipe[]>(
-        "https://angular-lrn-prj-default-rtdb.europe-west1.firebasedatabase.app/recipes.json"
+        "https://angular-lrn-prjct-default-rtdb.europe-west1.firebasedatabase.app/recipes.json"
       )
       .pipe(
         map((recipes) => {
