@@ -10,7 +10,8 @@ import { CoreModule } from "./core.module";
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./components/header/header.component";
 
-import { shoppingListReducer } from "./components/shopping/shopping-list/store/shopping-list.reducer";
+import { appReducer } from "./store/app.reducer";
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -20,7 +21,8 @@ import { shoppingListReducer } from "./components/shopping/shopping-list/store/s
     HttpClientModule,
     SharedModule,
     CoreModule,
-    StoreModule.forRoot({ shoppingList: shoppingListReducer }, {}),
+    StoreModule.forRoot(appReducer, {}),
+    EffectsModule.forRoot([]),
   ],
   bootstrap: [AppComponent],
 })

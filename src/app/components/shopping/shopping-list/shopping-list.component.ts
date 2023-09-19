@@ -4,8 +4,8 @@ import { Store } from "@ngrx/store";
 
 import { Ingredient } from "src/app/shared/ingredient.model";
 import { LoggingService } from "src/app/logging.service";
-import * as fromShoppingList from "./store/shopping-list.reducer";
 import { startEdit } from "./store/shopping-list.actions";
+import * as fromApp from "../../../store/app.reducer";
 
 @Component({
   selector: "app-shopping-list",
@@ -18,7 +18,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   constructor(
     private loggingService: LoggingService,
-    private store: Store<fromShoppingList.AppState>
+    private store: Store<fromApp.AppState>
   ) {
     this.ingredients = this.store.select("shoppingList");
   }
