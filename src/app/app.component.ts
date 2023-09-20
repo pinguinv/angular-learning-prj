@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "./components/auth/auth.service";
-import { LoggingService } from "./logging.service";
 import { Store } from "@ngrx/store";
+
+import { LoggingService } from "./logging.service";
 import { AppState } from "./store/app.reducer";
 import * as AuthActions from "./components/auth/store/auth.actions";
 
@@ -12,7 +12,6 @@ import * as AuthActions from "./components/auth/store/auth.actions";
 })
 export class AppComponent implements OnInit {
   constructor(
-    private authService: AuthService,
     private loggingService: LoggingService,
     private store: Store<AppState>
   ) {}

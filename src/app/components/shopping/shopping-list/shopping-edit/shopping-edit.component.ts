@@ -4,13 +4,8 @@ import { Subscription } from "rxjs";
 import { Store } from "@ngrx/store";
 
 import { Ingredient } from "src/app/shared/ingredient.model";
-import {
-  addIngredient,
-  deleteIngredient,
-  stopEdit,
-  updateIngredient,
-} from "../store/shopping-list.actions";
-import * as fromApp from "../../../../store/app.reducer";
+import { AppState } from "../../../../store/app.reducer";
+import * as ShoppingListActions from "../store/shopping-list.actions";
 
 @Component({
   selector: "app-shopping-edit",
@@ -23,7 +18,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   editedIngredient: Ingredient | null = null;
   subscription?: Subscription;
 
-  constructor(private store: Store<fromApp.AppState>) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.subscription = this.store
@@ -52,7 +47,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const newIngredient = new Ingredient(val.name, val.amount);
     if (this.editMode && this.editedIngredient) {
       this.store.dispatch(
-        updateIngredient({
+        ShoppingListActions.updateIngredient({
           ingredient: newIngredient,
         })
       );
@@ -61,7 +56,9 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       //   newIngredient
       // );
     } else {
-      this.store.dispatch(addIngredient({ ingredient: newIngredient }));
+      this.store.dispatch(
+        ShoppingListActions.addIngredient({ ingredient: newIngredient })
+      );
       // this.shoppingListService.addIngredient(newIngredient);
     }
     this.resetForm();
@@ -73,7 +70,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   deleteIngredient() {
     if (this.editMode) {
-      this.store.dispatch(deleteIngredient());
+      this.store.dispatch(ShoppingListActions.deleteIngredient());
       // this.shoppingListService.deleteIngredient(this.editedIngredientIndex);
       this.resetForm();
     }
@@ -83,11 +80,11 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     this.editMode = false;
     this.editedIngredient = null;
     this.slForm.reset();
-    this.store.dispatch(stopEdit());
+    this.store.dispatch(ShoppingListActions.stopEdit());
   }
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
-    this.store.dispatch(stopEdit());
+    this.store.dispatch(ShoppingListActions.stopEdit());
   }
 }
