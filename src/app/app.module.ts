@@ -12,6 +12,8 @@ import { CoreModule } from "./core.module";
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./components/header/header.component";
+import { NavDropdownComponent } from "./components/header/nav-dropdown/nav-dropdown.component";
+import { UserDropdownComponent } from "./components/header/user-dropdown/user-dropdown.component";
 
 import { appReducer } from "./store/app.reducer";
 import { AuthEffects } from "./components/auth/store/auth.effects";
@@ -20,7 +22,12 @@ import { RecipeEffects } from "./components/recipes/store/recipe.effects";
 import { environment } from "src/environments/environment.development";
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    NavDropdownComponent,
+    UserDropdownComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

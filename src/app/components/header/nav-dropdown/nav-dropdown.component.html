@@ -1,0 +1,24 @@
+<!-- Mobile menu, show/hide based on menu state. -->
+<div class="sm:hidden">
+  <div class="space-y-1 px-2 pb-3 pt-2">
+    <a
+      class="nav-item"
+      routerLink="/recipes"
+      routerLinkActive="active"
+      *ngIf="isAuthenticated"
+    >
+      Recipes
+    </a>
+    <a
+      class="nav-item"
+      routerLink="/auth"
+      routerLinkActive="active"
+      *ngIf="!isAuthenticated"
+    >
+      Authenticate
+    </a>
+    <a class="nav-item" routerLink="/shopping-list" routerLinkActive="active">
+      Shopping List
+    </a>
+  </div>
+</div>

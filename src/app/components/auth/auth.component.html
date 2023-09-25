@@ -1,6 +1,6 @@
 <ng-template appPlaceholder></ng-template>
-<div class="row">
-  <div class="col-xs-12 col-md-6 col-md-offset-3">
+<div class="">
+  <div class="h-full">
     <!-- <div class="alert alert-danger" *ngIf="error">
       <h2>An Error occured!</h2>
       <p>{{ error }}</p>
@@ -13,46 +13,31 @@
     ></app-alert> -->
     <div
       *ngIf="isLoading"
-      style="
-        display: flex;
-        width: 100%;
-        height: 100vh;
-        justify-content: center;
-        align-items: center;
-      "
+      class="flex h-screen w-full items-center justify-center"
     >
       <app-loading-spinner></app-loading-spinner>
     </div>
     <form [formGroup]="authForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
-      <div class="form-group">
+      <div class="">
         <label for="email">Email</label>
-        <input
-          type="text"
-          class="form-control"
-          id="email"
-          formControlName="email"
-        />
+        <input type="text" class="" id="email" formControlName="email" />
       </div>
-      <div class="form-group">
+      <div class="">
         <label for="password">Password</label>
         <input
           type="password"
-          class="form-control"
+          class=""
           id="password"
           minlength="6"
           formControlName="password"
         />
       </div>
       <div>
-        <button
-          class="btn btn-primary"
-          type="submit"
-          [disabled]="authForm.invalid"
-        >
+        <button class="" type="submit" [disabled]="authForm.invalid">
           {{ isLoginMode ? "Login" : "Sign up" }}
         </button>
         |
-        <button class="btn btn-primary" (click)="switchMode()" type="button">
+        <button class="" (click)="switchMode()" type="button">
           Switch to {{ !isLoginMode ? "Login" : "Sign up" }}
         </button>
       </div>
