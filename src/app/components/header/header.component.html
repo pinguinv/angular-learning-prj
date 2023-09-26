@@ -17,6 +17,7 @@
             class="block h-8 w-8 fill-none stroke-slate-300 stroke-[1.5]"
             viewBox="0 0 24 24"
             aria-hidden="true"
+            *ngIf="!navDropdown"
           >
             <path
               stroke-linecap="round"
@@ -30,9 +31,10 @@
             Menu open: "block", Menu closed: "hidden"
           -->
           <svg
-            class="hidden h-8 w-8 fill-none stroke-slate-300 stroke-[1.5]"
+            class="block h-8 w-8 fill-none stroke-slate-300 stroke-[1.5]"
             viewBox="0 0 24 24"
             aria-hidden="true"
+            *ngIf="navDropdown"
           >
             <path
               stroke-linecap="round"
@@ -43,15 +45,10 @@
         </button>
       </div>
 
-      <app-nav-dropdown
-        *ngIf="navDropdown"
-        [isAuthenticated]="isAuthenticated"
-      ></app-nav-dropdown>
-
       <!-- bigger than smol -->
 
       <div
-        class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+        class="flex flex-1 flex-wrap items-center justify-center sm:items-stretch sm:justify-start"
       >
         <div
           class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
@@ -100,6 +97,7 @@
             <button
               type="button"
               class="relative flex scale-125 rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              (click)="toggleUserDropdown()"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -115,36 +113,16 @@
             </button>
           </div>
 
-          <app-user-dropdown *ngIf="isAuthenticated"></app-user-dropdown>
+          <app-user-dropdown
+            *ngIf="isAuthenticated && userDropdown"
+            (closeDropdown)="toggleUserDropdown()"
+          ></app-user-dropdown>
         </div>
-
-        <!-- <div class="flex h-full">
-          <ul class="">
-            <li class="" *ngIf="isAuthenticated">
-              <a class="cursor-pointer" role="button">
-                Manage
-                <span class=""></span>
-              </a>
-              <ul class="">
-                <li>
-                  <a class="cursor-pointer" (click)="saveData()">Save Data</a>
-                </li>
-                <li>
-                  <a class="cursor-pointer" (click)="fetchData()">Fetch Data</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a
-                class="cursor-pointer"
-                *ngIf="isAuthenticated"
-                (click)="logoutUser()"
-                >Logout</a
-              >
-            </li>
-          </ul>
-        </div> -->
       </div>
     </div>
+    <app-nav-dropdown
+      *ngIf="navDropdown"
+      [isAuthenticated]="isAuthenticated"
+    ></app-nav-dropdown>
   </div>
 </nav>

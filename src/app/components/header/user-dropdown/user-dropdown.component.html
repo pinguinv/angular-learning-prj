@@ -1,21 +1,12 @@
-<div class="">
-  <ul class="">
-    <li class="">
-      <a class="cursor-pointer" role="button">
-        Manage
-        <span class=""></span>
-      </a>
-      <ul class="">
-        <li>
-          <a class="cursor-pointer" (click)="saveData()">Save Data</a>
-        </li>
-        <li>
-          <a class="cursor-pointer" (click)="fetchData()">Fetch Data</a>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <a class="cursor-pointer" (click)="logoutUser()">Logout</a>
-    </li>
-  </ul>
+<div
+  class="absolute right-0 z-10 mt-5 w-56 origin-top-right rounded-md bg-white shadow-lg ring-2 ring-black ring-opacity-10 focus:outline-none"
+  role="menu"
+  tabindex="-1"
+>
+  <div class="py-1" role="none">
+    <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+    <a class="dropdown-item" (click)="saveData()"> Save Data </a>
+    <a class="dropdown-item" (click)="fetchData()"> Fetch Data </a>
+    <a class="dropdown-item" (click)="logoutUser()"> Logout </a>
+  </div>
 </div>

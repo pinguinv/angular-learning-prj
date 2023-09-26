@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input[type="text"],
+input[type="password"],
+input[type="number"]{
+  @apply rounded-md text-slate-900 p-2 mx-4 my-3
+}
+
+button.btn{
+  @apply rounded-md opacity-100 bg-teal-550 py-[6px] px-3 m-2 hover:bg-teal-600 active:bg-teal-700 disabled:bg-slate-800 disabled:opacity-60
+}
