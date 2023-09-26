@@ -1,19 +1,25 @@
-<div class="row">
-  <div class="col-xs-10">
-    <app-shopping-edit></app-shopping-edit>
-    <hr />
-    <ul class="list-group">
-      <a
-        class="list-group-item"
-        style="cursor: pointer"
-        *ngFor="
-          let ingredient of (ingredients | async)!.ingredients;
-          let i = index
-        "
-        (click)="editIngredient(i)"
-      >
-        {{ ingredient.name }} ({{ ingredient.amount }})
-      </a>
-    </ul>
+<div class="flex w-full justify-center">
+  <div class="w-full max-w-4xl">
+    <div class="mt-10 flex flex-wrap justify-center">
+      <div class="flex w-full justify-center md:w-1/2">
+        <app-shopping-edit></app-shopping-edit>
+      </div>
+      <div class="flex w-full justify-center pt-8 md:w-1/2 md:pt-0">
+        <ul class="flex w-80 flex-col items-center">
+          <a
+            class="bg-slate-550 active:bg-slate-450 mb-2 w-80 cursor-pointer rounded-lg py-3 text-center hover:bg-slate-500 md:w-full"
+            *ngFor="
+              let ingredient of (ingredients | async)!.ingredients;
+              let i = index
+            "
+            (click)="editIngredient(i)"
+          >
+            {{ ingredient.name }} ({{ ingredient.amount }})
+          </a>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- 215°, 18%, 88 -->

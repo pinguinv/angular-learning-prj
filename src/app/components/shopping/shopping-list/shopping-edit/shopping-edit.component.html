@@ -1,50 +1,52 @@
-<div class="row">
-  <div class="col-xs-12">
-    <form #f="ngForm" (ngSubmit)="submitForm(f)">
-      <div class="row">
-        <div class="col-sm-5 form-group">
-          <label for="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            class="form-control"
-            name="name"
-            ngModel
-            required
-          />
-        </div>
-        <div class="col-sm-2 form-group">
-          <label for="amount">Amount</label>
-          <input
-            min="0"
-            type="number"
-            id="amount"
-            class="form-control"
-            name="amount"
-            ngModel
-            required
-            pattern="^[1-9]+[0-9]*$"
-          />
-        </div>
+<div class="bg-slate-550 w-4/5 min-w-[320px] rounded-md px-8 py-6 shadow-md">
+  <form #f="ngForm" (ngSubmit)="submitForm(f)">
+    <div class="">
+      <div class="mb-4">
+        <label for="name" class="block text-base font-bold">Name</label>
+        <input
+          type="text"
+          id="name"
+          class="w-full"
+          name="name"
+          ngModel
+          required
+        />
       </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <button class="btn btn-success" type="submit" [disabled]="!f.valid">
-            {{ editMode ? "Update" : "Add" }}
-          </button>
-          <button
-            class="btn btn-danger"
-            type="button"
-            (click)="deleteIngredient()"
-            [disabled]="!editMode"
-          >
-            Delete
-          </button>
-          <button class="btn btn-primary" type="button" (click)="clearForm()">
-            Clear
-          </button>
-        </div>
+      <div class="mb-4">
+        <label for="amount" class="block text-base font-bold">Amount</label>
+        <input
+          min="0"
+          type="number"
+          id="amount"
+          class="w-full"
+          name="amount"
+          ngModel
+          required
+          pattern="^[1-9]+[0-9]*$"
+        />
       </div>
-    </form>
-  </div>
+    </div>
+    <div class="flex w-full justify-center">
+      <div class="flex w-5/6 flex-wrap">
+        <button class="btn flex-grow" type="submit" [disabled]="!f.valid">
+          {{ editMode ? "Update" : "Add" }}
+        </button>
+        <button
+          class="btn btn-red flex-grow"
+          type="button"
+          (click)="deleteIngredient()"
+          [disabled]="!editMode"
+        >
+          Delete
+        </button>
+        <button
+          class="btn btn-transparent flex-grow"
+          type="button"
+          (click)="clearForm()"
+        >
+          Clear
+        </button>
+      </div>
+    </div>
+  </form>
 </div>
