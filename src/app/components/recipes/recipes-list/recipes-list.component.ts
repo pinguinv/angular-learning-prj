@@ -11,6 +11,7 @@ import { Store } from "@ngrx/store";
 
 import { AppState } from "../../../store/app.reducer";
 import { Recipe } from "../recipe.model";
+import * as RecipeActions from "../../recipes/store/recipe.actions";
 
 @Component({
   selector: "app-recipes-list",
@@ -25,10 +26,12 @@ export class RecipesListComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private currentRoute: ActivatedRoute,
-    private store: Store<AppState>
+    private store: Store<AppState>,
   ) {}
 
   ngOnInit(): void {
+    this.store.dispatch(RecipeActions.fetchRecipes());
+
     this.subscription = this.store
       .select("recipes")
       .pipe(map((recipesState) => recipesState.recipes))

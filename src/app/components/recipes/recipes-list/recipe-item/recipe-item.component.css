@@ -1,0 +1,7 @@
+.recipe-item{
+  @apply text-base
+}
+
+.active{
+  @apply bg-slate-700
+}

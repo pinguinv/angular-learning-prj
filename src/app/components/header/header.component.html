@@ -1,18 +1,12 @@
 <nav class="min-w-[250px] bg-gray-800">
-  <div class="lg-px-8 mx-auto max-w-7xl px-2 sm:px-6">
+  <div class="lg-px-8 mx-auto max-w-6xl px-2 sm:px-6">
     <div class="relative flex h-20 items-center justify-between">
       <div class="absolute inset-y-0 left-1 flex items-center sm:hidden">
-        <!-- Mobile menu button-->
         <button
           type="button"
           class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-100"
           (click)="toggleNavDropdown()"
         >
-          <!--
-            Icon when menu is closed.
-
-            Menu open: "hidden", Menu closed: "block"
-          -->
           <svg
             class="block h-8 w-8 fill-none stroke-slate-300 stroke-[1.5]"
             viewBox="0 0 24 24"
@@ -25,11 +19,6 @@
               d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
             />
           </svg>
-          <!--
-            Icon when menu is open.
-            
-            Menu open: "block", Menu closed: "hidden"
-          -->
           <svg
             class="block h-8 w-8 fill-none stroke-slate-300 stroke-[1.5]"
             viewBox="0 0 24 24"
@@ -44,8 +33,6 @@
           </svg>
         </button>
       </div>
-
-      <!-- bigger than smol -->
 
       <div
         class="flex flex-1 flex-wrap items-center justify-center sm:items-stretch sm:justify-start"
@@ -62,7 +49,6 @@
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a
                 class="nav-item"
                 routerLink="/recipes"
@@ -92,7 +78,6 @@
         <div
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
-          <!-- Profile dropdown -->
           <div class="relative ml-3" *ngIf="isAuthenticated">
             <button
               type="button"

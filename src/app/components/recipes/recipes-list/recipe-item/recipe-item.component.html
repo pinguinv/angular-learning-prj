@@ -1,19 +1,23 @@
-<a
+<div
   [routerLink]="index.toString()"
-  class="list-group-item clearfix"
-  style="cursor: pointer"
+  class="m-2 my-2 flex w-80 cursor-pointer flex-col-reverse justify-between overflow-hidden rounded-xl bg-slate-550 shadow-lg hover:bg-slate-600 sm:w-96 md:w-80 md:flex-row lg:w-96 xl:w-10/12"
   routerLinkActive="active"
 >
-  <div class="pull-left">
-    <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
-    <p class="list-group-item-text">{{ recipe.description }}</p>
+  <div class="h-32 w-full p-3 md:w-3/4">
+    <h4 class="w-full overflow-hidden text-lg font-bold">{{ recipe.name }}</h4>
+    <p class="w-full overflow-hidden break-words">
+      {{
+        recipe.description.length < 50
+          ? recipe.description
+          : recipe.description.slice(0, 45) + "..."
+      }}
+    </p>
   </div>
-  <span class="pull-right">
+  <div class="flex justify-end md:w-1/4 md:shrink-0">
     <img
       [src]="recipe.imagePath"
       [alt]="recipe.name"
-      class="img-responsive"
-      style="max-height: 50px"
+      class="h-32 w-full object-cover md:h-full md:w-20"
     />
-  </span>
-</a>
+  </div>
+</div>
