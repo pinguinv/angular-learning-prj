@@ -16,11 +16,12 @@ import * as ShoppingListActions from "../../shopping/shopping-list/store/shoppin
 export class RecipeDetailComponent implements OnInit {
   @Input() recipeInfo?: Recipe;
   index: number = -1;
+  showDropdown = false;
 
   constructor(
     private currentRoute: ActivatedRoute,
     private router: Router,
-    private store: Store<AppState>
+    private store: Store<AppState>,
   ) {}
 
   ngOnInit(): void {
@@ -32,8 +33,8 @@ export class RecipeDetailComponent implements OnInit {
           return this.store.select("recipes");
         }),
         map((recipesState) =>
-          recipesState.recipes.find((recipe, index) => index === this.index)
-        )
+          recipesState.recipes.find((recipe, index) => index === this.index),
+        ),
       )
       .subscribe({
         next: (recipe) => {
@@ -42,21 +43,40 @@ export class RecipeDetailComponent implements OnInit {
       });
   }
 
-  addToShoppingList() {
+  private addToShoppingList() {
     this.store.dispatch(
       ShoppingListActions.addIngredients({
         ingredients: this.recipeInfo!.ingredients,
-      })
+      }),
     );
   }
 
-  editRecipe() {
+  private editRecipe() {
     this.router.navigate(["edit"], { relativeTo: this.currentRoute });
   }
 
-  deleteRecipe() {
+  private deleteRecipe() {
     // this.recipeService.deleteRecipe(this.index);
     this.store.dispatch(RecipesActions.deleteRecipe({ index: this.index }));
     this.router.navigate(["../"], { relativeTo: this.currentRoute });
+  }
+
+  onEmit(event: "addToShoppingList" | "editRecipe" | "deleteRecipe") {
+    switch (event) {
+      case "addToShoppingList":
+        this.addToShoppingList();
+        break;
+      case "editRecipe":
+        this.editRecipe();
+        break;
+      case "deleteRecipe":
+        this.deleteRecipe();
+        break;
+    }
+    this.toggleDropdown();
+  }
+
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
   }
 }

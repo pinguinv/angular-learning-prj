@@ -10,6 +10,7 @@ import { RecipesComponent } from "./recipes.component";
 import { RecipeDetailComponent } from "./recipe-detail/recipe-detail.component";
 import { RecipeStartComponent } from "./recipe-start/recipe-start.component";
 import { RecipeEditComponent } from "./recipe-edit/recipe-edit.component";
+import { ManageDropdownComponent } from './recipe-detail/manage-dropdown/manage-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RecipeEditComponent } from "./recipe-edit/recipe-edit.component";
     RecipeDetailComponent,
     RecipeStartComponent,
     RecipeEditComponent,
+    ManageDropdownComponent,
   ],
   imports: [
     ReactiveFormsModule,

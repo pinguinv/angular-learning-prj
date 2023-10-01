@@ -1,8 +1,8 @@
 <div class="flex flex-wrap justify-center pt-4">
   <div
-    class="bg-slate-650 mb-10 w-96 max-w-2xl overflow-hidden rounded-xl sm:w-5/6 md:mb-0"
+    class="mb-10 w-96 max-w-2xl overflow-hidden rounded-xl bg-slate-650 sm:w-5/6 md:mb-0"
   >
-    <div class="">
+    <div>
       <div class="flex h-48 w-full items-center overflow-hidden">
         <img
           [src]="recipeInfo!.imagePath"
@@ -12,51 +12,72 @@
       </div>
     </div>
     <div class="p-4">
-      <div class="">
-        <div class="col-xs-12">
-          <h1>{{ recipeInfo!.name }}</h1>
+      <div class="mb-3 w-full">
+        <div class="w-fit max-w-full text-2xl font-bold">
+          {{ recipeInfo!.name }}
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div appDropdown class="btn-group">
-            <button type="button" class="btn btn-primary dropdown-toggle">
-              Manage Recipe <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <a style="cursor: pointer" (click)="addToShoppingList()">
-                  To Shopping List
-                </a>
-              </li>
-              <li>
-                <a style="cursor: pointer" (click)="editRecipe()"
-                  >Edit Recipe</a
-                >
-              </li>
-              <li>
-                <a style="cursor: pointer" (click)="deleteRecipe()"
-                  >Delete Recipe</a
-                >
-              </li>
-            </ul>
+      <div class="mb-3">
+        <div>
+          <button (click)="toggleDropdown()" type="button" class="btn">
+            Manage Recipe
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              class="inline-block h-4 w-4 fill-none stroke-slate-100 stroke-2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          </button>
+          <app-manage-dropdown
+            *ngIf="showDropdown"
+            (manageEmitter)="onEmit($event)"
+          ></app-manage-dropdown>
+        </div>
+      </div>
+      <div class="mb-3 w-full">
+        <div class="w-full overflow-hidden break-words">
+          <div class="font-bold">Description:</div>
+          <div class="px-4">
+            {{ recipeInfo!.description }}
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12">{{ recipeInfo!.description }}</div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
+      <div *ngIf="recipeInfo!.ingredients.length > 0">
+        <div class="mb-3 font-bold">
           Ingredients:
-          <ul class="list-group">
+          <ul class="mx-8 flex flex-col">
             <li
-              class="list-group-item"
+              class="break-words"
               *ngFor="let ingredient of recipeInfo!.ingredients"
             >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                class="inline-block h-5 w-5 fill-none stroke-slate-100 stroke-2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.5 12.75l6 6 9-13.5"
+                />
+              </svg>
+
               {{ ingredient.name }} - {{ ingredient.amount }}
             </li>
           </ul>
+        </div>
+      </div>
+      <div
+        class="flex w-full justify-center"
+        *ngIf="recipeInfo!.ingredients.length == 0"
+      >
+        <div class="w-3/4 text-center font-bold">
+          There is no data about ingredients for this recipe.
         </div>
       </div>
     </div>
