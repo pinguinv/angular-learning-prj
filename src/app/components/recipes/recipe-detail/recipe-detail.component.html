@@ -2,14 +2,12 @@
   <div
     class="mb-10 w-96 max-w-2xl overflow-hidden rounded-xl bg-slate-650 sm:w-5/6 md:mb-0"
   >
-    <div>
-      <div class="flex h-48 w-full items-center overflow-hidden">
-        <img
-          [src]="recipeInfo!.imagePath"
-          [alt]="recipeInfo!.name"
-          class="h-auto w-full"
-        />
-      </div>
+    <div class="flex h-48 w-full items-center overflow-hidden">
+      <img
+        [src]="recipeInfo!.imagePath"
+        [alt]="recipeInfo!.name"
+        class="h-auto w-full"
+      />
     </div>
     <div class="p-4">
       <div class="mb-3 w-full">
@@ -18,26 +16,24 @@
         </div>
       </div>
       <div class="mb-3">
-        <div>
-          <button (click)="toggleDropdown()" type="button" class="btn">
-            Manage Recipe
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              class="inline-block h-4 w-4 fill-none stroke-slate-100 stroke-2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-              />
-            </svg>
-          </button>
-          <app-manage-dropdown
-            *ngIf="showDropdown"
-            (manageEmitter)="onEmit($event)"
-          ></app-manage-dropdown>
-        </div>
+        <button (click)="toggleDropdown()" type="button" class="btn">
+          Manage Recipe
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            class="inline-block h-4 w-4 fill-none stroke-slate-100 stroke-2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+            />
+          </svg>
+        </button>
+        <app-manage-dropdown
+          *ngIf="showDropdown"
+          (manageEmitter)="onEmit($event)"
+        ></app-manage-dropdown>
       </div>
       <div class="mb-3 w-full">
         <div class="w-full overflow-hidden break-words">
